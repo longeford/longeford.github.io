@@ -1,0 +1,20 @@
+---
+layout: page
+title: Categories
+permalink: /categories/
+---
+
+<h1>Categories</h1>
+<ul>
+  {% assign categories = site.categories %}
+  {% for category in categories %}
+    <li id="{{ category[0] | slugify }}">
+      <strong>{{ category[0] }} ({{ category[1].size }})</strong>
+      <ul>
+        {% for post in category[1] %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
