@@ -23,13 +23,14 @@ email: your-email@example.com
 description: Musing on issues ranging from corporate finance theory to political economy
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.comminima:
+
+# Build settings
+theme: minima
 minima:
   social_links:
     - { platform: github,  user_url: "https://github.com/jekyll/jekyll" }
     - { platform: linkedin, user_url:"https://www.linkedin.com/in/jekyll" }
     - { platform: bluesky, user_url: "https://bluesky.com/jekyllrb" }
-# Build settings
-theme: minima
 plugins:
   - jekyll-feed
 
