@@ -153,6 +153,60 @@ a:hover {
   }
 }
 
+// Blog categories and tags
+.taxonomy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0.3rem 0 0;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  line-height: 1.6;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.chip-category {
+  background: $brand-color;
+  color: #fff;
+
+  &:visited,
+  &:hover {
+    color: #fff;
+  }
+}
+
+.chip-tag {
+  border: 1px solid $grey-color-light;
+  color: $grey-color-dark;
+
+  &:visited {
+    color: $grey-color-dark;
+  }
+
+  &:hover {
+    border-color: $brand-color;
+    color: $brand-color;
+  }
+}
+
+.topics-link {
+  font-size: 0.95rem;
+}
+
+.count {
+  color: $grey-color;
+  font-weight: 400;
+}
+
 // CV
 .pdf-embed iframe {
   width: 100%;

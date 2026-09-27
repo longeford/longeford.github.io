@@ -24,6 +24,7 @@ layout: base
             {%- if forloop.last == false %}, {% endif -%}
         {% endfor %}
       {%- endif -%}</p>
+    {%- include post-taxonomy.html post=page -%}
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">

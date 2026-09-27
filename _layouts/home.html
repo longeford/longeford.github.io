@@ -18,6 +18,9 @@ layout: base
 
 
   {%- if posts.size > 0 -%}
+    {%- if site.categories.size > 0 or site.tags.size > 0 -%}
+      <p class="topics-link"><a href="{{ "/blog/topics/" | relative_url }}">Browse by category and tag →</a></p>
+    {%- endif -%}
     {%- if page.list_title -%}
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}
@@ -31,6 +34,7 @@ layout: base
             {{ post.title | escape }}
           </a>
         </h3>
+        {%- include post-taxonomy.html post=post -%}
         {%- if site.show_excerpts -%}
           {{ post.excerpt }}
         {%- endif -%}

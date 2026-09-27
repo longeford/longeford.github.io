@@ -1,0 +1,15 @@
+{%- comment -%}
+  Category and tag chips for one post, linking to the topics page.
+  Usage: {% include post-taxonomy.html post=post %}
+{%- endcomment -%}
+{%- assign topics_url = "/blog/topics/" | relative_url -%}
+{%- if include.post.categories.size > 0 or include.post.tags.size > 0 -%}
+<ul class="taxonomy">
+  {%- for category in include.post.categories -%}
+    <li><a class="chip chip-category" href="{{ topics_url }}#cat-{{ category | slugify }}">{{ category }}</a></li>
+  {%- endfor -%}
+  {%- for tag in include.post.tags -%}
+    <li><a class="chip chip-tag" href="{{ topics_url }}#tag-{{ tag | slugify }}">#{{ tag }}</a></li>
+  {%- endfor -%}
+</ul>
+{%- endif -%}
