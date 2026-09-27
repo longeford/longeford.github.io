@@ -27,7 +27,7 @@ footer:
 photo: /assets/img/profile.jpg
 
 # Banner image across the top of the About page (optional).
-# banner: /assets/img/banner.jpg
+banner: /assets/img/banner.jpg
 
 # CV: the Dropbox *shared link to the PDF file* (Share -> Copy link).
 # Overwrite the file in Dropbox with the same name and the site updates automatically.
