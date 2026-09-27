@@ -24,7 +24,7 @@ footer:
   disclaimer: "The views expressed on this website are my own."
 
 # Profile photo (optional). Put the image in assets/img/ and uncomment.
-# photo: /assets/img/profile.jpg
+photo: /assets/img/profile.jpg
 
 # Banner image across the top of the About page (optional).
 # banner: /assets/img/banner.jpg
