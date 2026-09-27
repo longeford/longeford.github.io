@@ -2,6 +2,7 @@
 layout: post
 title: "Welcome to My Blog"
 category: blog_project
+tag: trial
 ---
 
 Hello, world! This is a test post.
