@@ -2,6 +2,7 @@
 layout: page
 title: Blog topics
 permalink: /blog/topics/
+description: "Blog posts by Oscar Lange grouped by category and tag."
 ---
 
 [← All posts]({{ "/blog/" | relative_url }})

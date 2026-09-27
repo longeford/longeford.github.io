@@ -2,6 +2,7 @@
 layout: about
 title: About
 permalink: /
+description: "Oscar Lange, PhD candidate at Université Paris Dauphine – PSL working on financial intermediation, banking supervision and regulation."
 ---
 
 I am a PhD candidate at Université Paris Dauphine – PSL working on financial intermediation under the direction of [Sylvain Benoit](https://sites.google.com/site/sylvainbenoit87/) and [Sylvain Carré](https://sites.google.com/view/sylvain-carre/research).

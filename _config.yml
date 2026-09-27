@@ -1,9 +1,10 @@
 title: "Oscar Lange"
-description: "Academic website — research, teaching, and a blog on corporate finance theory and real analysis."
+description: "Oscar Lange, PhD candidate in finance at Université Paris Dauphine – PSL, working on banking supervision and financial intermediation."
 theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
 author:
   name: "Oscar Lange"
@@ -15,6 +16,22 @@ author:
 # institution_url: "https://dauphine.psl.eu/..."
 github_username: longeford
 
+# Site address. Leave unset: GitHub Pages fills it in automatically, including after
+# switching to a custom domain. Set it only if the sitemap/links ever show the wrong address.
+# url: "https://yourdomain.com"
+
+# Google Search Console verification ("HTML tag" method: paste only the content="..." value)
+# webmaster_verifications:
+#   google: ""
+
+# Profiles search engines should associate with you (jekyll-seo-tag)
+social:
+  name: "Oscar Lange"
+  links:
+    - https://github.com/longeford
+    # - https://www.linkedin.com/in/your-handle
+    # - https://scholar.google.com/citations?user=...
+
 # Footer
 footer:
   address: |
@@ -25,6 +42,8 @@ footer:
 
 # Profile photo (optional). Put the image in assets/img/ and uncomment.
 photo: /assets/img/profile.jpg
+# Preview image for links shared on LinkedIn, Slack, etc.
+image: /assets/img/profile.jpg
 
 # Banner image across the top of the About page (optional).
 banner: /assets/img/banner.jpg
@@ -50,3 +69,4 @@ kramdown:
   input: GFM
   math_engine: mathjax
   syntax_highlighter: rouge
+
