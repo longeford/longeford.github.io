@@ -6,9 +6,13 @@ permalink: /research/
 
 ## Working Papers
 
-- **Paper title** (with Coauthor)
-  One- or two-sentence abstract. [PDF](#)
+- **Imperfect Supervision, Regulatory Penalties,and Banks’ Disclosing Culture** (with [Sylvain Carré](https://sites.google.com/view/sylvain-carre/research))
+
+Available upon request. New draft coming soon!
+ 
 
 ## Work in Progress
 
-- **Project title**
+- **Prudential Regulation and Bank Lobbying** (with [Sylvain Benoit](https://sites.google.com/site/sylvainbenoit87/))
+
+- **Inspection design in Banking supervision**
