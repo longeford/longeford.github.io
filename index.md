@@ -8,7 +8,8 @@ I am a PhD candidate at Université Paris Dauphine – PSL working on financial 
 
 I am interested in the information asymmetry between the industry and central banks in the creation of financial regulation and the conduct of banking supervision. 
 
-You can find my current work on the [research]({{ "/research/" | relative_url }}) page and my [CV]({{ "/cv/" | relative_url }}) here.
-I also write a [blog]({{ "/blog/" | relative_url }}) on corporate finance theory and real analysis.
+In the fall term 2026, I am visiting UCL School of Management on the invitation of Fred Malherbe.
+
+I enjoy playing the guitar and the piano (in groups) and I spend my free time climbing and swimming (also in groups). A good recent novel that I read is Guillaume Chamanadjian's "Heureux comme jamais". 
 
 {% if site.author.email %}If you'd like to get in touch, feel free to [reach out](mailto:{{ site.author.email }}).{% endif %}
