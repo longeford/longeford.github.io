@@ -1,2 +1,2 @@
-# Corporate-Analysis
-A repository to host my blog on corporate finance theory
+# My academic page
+A repository to host my academic page and my blog
