@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Personal academic website (About, CV, Research, Teaching, Blog) built with Jekyll and the remote `minima` theme, hosted from the GitHub repo `longeford/Corporate-Analysis` (GitHub Pages). The blog covers corporate finance theory and real analysis. There is no Gemfile, build script, linter, or test suite; GitHub Pages builds the site on push.
+Personal academic website (About, CV, Research, Teaching, Blog) built with Jekyll and the remote `minima` theme, hosted from the GitHub repo `longeford/Oscar-Lange` (GitHub Pages, served at https://longeford.github.io/Oscar-Lange/; the repo was previously named `Corporate-Analysis`). A separate, older `longeford.github.io` repo also exists and serves the root domain, including 404 pages for unknown paths. The blog covers corporate finance theory and real analysis. There is no Gemfile, build script, linter, or test suite; GitHub Pages builds the site on push.
 
 ## Local preview
 
@@ -15,7 +15,7 @@ gem install jekyll minima
 jekyll serve
 ```
 
-Output goes to `_site/` (gitignored). Always build internal links/assets with `relative_url` — as a project site, GitHub Pages serves it under a `/Corporate-Analysis` baseurl that it injects automatically.
+Output goes to `_site/` (gitignored). Always build internal links/assets with `relative_url` — as a project site, GitHub Pages serves it under a `/Oscar-Lange` baseurl that it injects automatically.
 
 ## Architecture
 
