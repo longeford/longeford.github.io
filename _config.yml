@@ -50,7 +50,7 @@ banner: /assets/img/banner.jpg
 
 # CV: the Dropbox *shared link to the PDF file* (Share -> Copy link).
 # Overwrite the file in Dropbox with the same name and the site updates automatically.
-cv_dropbox_url: ""
+cv_dropbox_url: "https://www.dropbox.com/scl/fi/fgwrshuzom6uh28p9mx1z/CV_OL.pdf?rlkey=jnqktj55v6kk61v8inxe3ypnu&dl=0"
 
 # Order of the tabs in the top navigation
 header_pages:
