@@ -1,5 +1,8 @@
 title: "Oscar Lange"
 description: "Oscar Lange, PhD candidate in finance at Université Paris Dauphine – PSL, working on banking supervision and financial intermediation."
+# Shown after your name in the homepage's title in Google: "Oscar Lange | <tagline>"
+tagline: "PhD Candidate in Finance, Université Paris Dauphine – PSL"
+lang: "en"
 theme: minima
 plugins:
   - jekyll-feed

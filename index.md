@@ -1,6 +1,7 @@
 ---
 layout: about
-title: About
+title: Oscar Lange   # page title in Google; same as the site title so it isn't shown twice
+nav_title: About     # label of the tab in the menu
 permalink: /
 description: "Oscar Lange, PhD candidate at Université Paris Dauphine – PSL working on financial intermediation, banking supervision and regulation."
 ---
