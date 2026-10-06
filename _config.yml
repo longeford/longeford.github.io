@@ -63,6 +63,11 @@ header_pages:
   - teaching.md
   - blog.md
 
+# Files in the repo that must not be published as pages
+exclude:
+  - CLAUDE.md
+  - README.md
+
 # Blog posts live under /blog/
 permalink: /blog/:year/:month/:day/:title/
 
