@@ -24,8 +24,8 @@ github_username: longeford
 # url: "https://yourdomain.com"
 
 # Google Search Console verification ("HTML tag" method: paste only the content="..." value)
-# webmaster_verifications:
-#   google: ""
+webmaster_verifications:
+  google: "3DZOdlSHApcOcIU8I9AFVWbdDopbYchHyc2NtlQY8_k"
 
 # Profiles search engines should associate with you (jekyll-seo-tag)
 social:
