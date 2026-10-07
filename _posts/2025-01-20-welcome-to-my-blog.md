@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Welcome to My Blog"
+redirect_from: /Oscar-Lange/blog/2025/01/20/welcome-to-my-blog/  # old address
 category: blog_project
 tag: trial
 ---

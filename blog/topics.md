@@ -2,6 +2,7 @@
 layout: page
 title: Blog topics
 permalink: /blog/topics/
+redirect_from: /Oscar-Lange/blog/topics/  # old address, forwards to this page
 description: "Blog posts by Oscar Lange grouped by category and tag."
 ---
 

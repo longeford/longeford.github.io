@@ -2,6 +2,7 @@
 layout: page
 title: Teaching
 permalink: /teaching/
+redirect_from: /Oscar-Lange/teaching/  # old address, forwards to this page
 description: "Teaching by Oscar Lange at Université Paris Dauphine – PSL: Intermediate Macroeconomics and Mathematics for Economists."
 ---
 

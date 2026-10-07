@@ -2,6 +2,7 @@
 layout: page
 title: Research
 permalink: /research/
+redirect_from: /Oscar-Lange/research/  # old address, forwards to this page
 description: "Working papers and ongoing research by Oscar Lange on banking supervision, regulatory penalties, bank disclosure and lobbying."
 ---
 
