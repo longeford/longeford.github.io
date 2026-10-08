@@ -1,12 +1,14 @@
 {%- comment -%}
-  Shows a PDF from a Dropbox shared link, drawn page by page with PDF.js.
+  Shows a PDF from a Dropbox shared link inside the page.
   Usage: {% include dropbox-pdf.html url=site.cv_dropbox_url title="CV" %}
 
-  Why not an <iframe>: www.dropbox.com forbids being framed by other sites
-  (CSP frame-ancestors), which Firefox enforces even on its redirect. The direct
-  file host (dl.dropboxusercontent.com) allows cross-site fetches (CORS: *), so
-  PDF.js downloads the file from there and renders it onto <canvas> elements.
-  This also works on phones, where framed PDFs usually don't display.
+  Why not a plain <iframe src="dropbox link">: www.dropbox.com forbids being
+  framed by other sites (CSP frame-ancestors), which Firefox enforces. Instead:
+  1. fetch the file from dl.dropboxusercontent.com (it allows this: CORS *),
+  2. wrap it in a local blob: URL, which belongs to this site,
+  3. desktop browsers with a built-in PDF viewer (navigator.pdfViewerEnabled)
+     show that blob in an <iframe> with the full native viewer;
+     others (most phones) get the pages drawn with PDF.js, with clickable links.
 {%- endcomment -%}
 {%- assign url = include.url | strip -%}
 {%- if url != "" -%}
@@ -21,60 +23,108 @@
   <p class="pdf-links">
     <a href="{{ download }}">Download</a>
   </p>
-  <div class="pdf-viewer" data-src="{{ file }}" aria-label="{{ include.title | default: 'PDF' }}">
+  <div class="pdf-viewer" data-src="{{ file }}" data-title="{{ include.title | default: 'PDF' }}">
     <p class="pdf-status">Loading {{ include.title | default: "PDF" }}…</p>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
     (function () {
-      var viewer = document.currentScript.previousElementSibling.previousElementSibling;
+      var viewer = document.currentScript.previousElementSibling;
       var status = viewer.querySelector(".pdf-status");
-      if (!window.pdfjsLib) {
+      var PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+
+      function fail() {
         status.textContent = "The preview could not be loaded. Use the Download link above.";
-        return;
-      }
-      pdfjsLib.GlobalWorkerOptions.workerSrc =
-        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
-
-      var pdf = null, lastWidth = 0, generation = 0;
-
-      function render() {
-        var width = viewer.clientWidth;
-        if (!pdf || width === lastWidth) return;
-        lastWidth = width;
-        var current = ++generation; // a newer render (after a resize) cancels this one
-        viewer.querySelectorAll("canvas").forEach(function (c) { c.remove(); });
-        var ratio = window.devicePixelRatio || 1;
-        var chain = Promise.resolve();
-        for (var n = 1; n <= pdf.numPages; n++) {
-          (function (n) {
-            chain = chain.then(function () { return pdf.getPage(n); }).then(function (page) {
-              if (current !== generation) return;
-              var scale = width / page.getViewport({ scale: 1 }).width;
-              var viewport = page.getViewport({ scale: scale * ratio });
-              var canvas = document.createElement("canvas");
-              canvas.width = viewport.width;
-              canvas.height = viewport.height;
-              canvas.style.width = "100%";
-              viewer.appendChild(canvas);
-              return page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
-            });
-          })(n);
-        }
       }
 
-      pdfjsLib.getDocument(viewer.dataset.src).promise.then(function (doc) {
-        pdf = doc;
+      fetch(viewer.dataset.src)
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.arrayBuffer(); })
+        .then(function (data) {
+          if (navigator.pdfViewerEnabled) {
+            showNative(data);
+          } else {
+            showPdfJs(data);
+          }
+        })
+        .catch(fail);
+
+      // Desktop: the browser's own PDF viewer (selectable text, search, zoom, links)
+      function showNative(data) {
+        var blob = new Blob([data], { type: "application/pdf" });
+        var frame = document.createElement("iframe");
+        frame.src = URL.createObjectURL(blob);
+        frame.title = viewer.dataset.title;
+        frame.className = "pdf-frame";
         status.remove();
-        render();
-        var timer;
-        window.addEventListener("resize", function () {
-          clearTimeout(timer);
-          timer = setTimeout(render, 200);
-        });
-      }).catch(function () {
-        status.textContent = "The preview could not be loaded. Use the Download link above.";
-      });
+        viewer.appendChild(frame);
+      }
+
+      // Phones: draw the pages with PDF.js, with clickable links laid over them
+      function showPdfJs(data) {
+        var script = document.createElement("script");
+        script.src = PDFJS + "pdf.min.js";
+        script.onerror = fail;
+        script.onload = function () {
+          pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + "pdf.worker.min.js";
+          pdfjsLib.getDocument({ data: data }).promise.then(function (pdf) {
+            status.remove();
+            var lastWidth = 0, generation = 0, timer;
+
+            function render() {
+              var width = viewer.clientWidth;
+              if (width === lastWidth) return;
+              lastWidth = width;
+              var current = ++generation; // a newer render (after a resize) cancels this one
+              viewer.querySelectorAll(".pdf-page").forEach(function (p) { p.remove(); });
+              var ratio = window.devicePixelRatio || 1;
+              var chain = Promise.resolve();
+              for (var n = 1; n <= pdf.numPages; n++) {
+                (function (n) {
+                  chain = chain.then(function () { return pdf.getPage(n); }).then(function (page) {
+                    if (current !== generation) return;
+                    var base = page.getViewport({ scale: 1 });
+                    var viewport = page.getViewport({ scale: (width / base.width) * ratio });
+
+                    var wrapper = document.createElement("div");
+                    wrapper.className = "pdf-page";
+                    var canvas = document.createElement("canvas");
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+                    wrapper.appendChild(canvas);
+                    viewer.appendChild(wrapper);
+
+                    // Links positioned in % so they stay aligned at any width
+                    page.getAnnotations().then(function (annotations) {
+                      annotations.forEach(function (a) {
+                        if (a.subtype !== "Link" || !a.url) return;
+                        var r = base.convertToViewportRectangle(a.rect);
+                        var link = document.createElement("a");
+                        link.href = a.url;
+                        link.target = "_blank";
+                        link.rel = "noopener";
+                        link.title = a.url;
+                        link.style.left = (Math.min(r[0], r[2]) / base.width * 100) + "%";
+                        link.style.top = (Math.min(r[1], r[3]) / base.height * 100) + "%";
+                        link.style.width = (Math.abs(r[2] - r[0]) / base.width * 100) + "%";
+                        link.style.height = (Math.abs(r[3] - r[1]) / base.height * 100) + "%";
+                        wrapper.appendChild(link);
+                      });
+                    });
+
+                    return page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
+                  });
+                })(n);
+              }
+            }
+
+            render();
+            window.addEventListener("resize", function () {
+              clearTimeout(timer);
+              timer = setTimeout(render, 200);
+            });
+          }).catch(fail);
+        };
+        document.head.appendChild(script);
+      }
     })();
   </script>
 {%- else -%}

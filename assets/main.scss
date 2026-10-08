@@ -208,11 +208,32 @@ a:hover {
 }
 
 // CV
-.pdf-viewer canvas {
+.pdf-frame {
   display: block;
+  width: 100%;
+  height: 85vh;
+  border: 1px solid $grey-color-light;
+}
+
+.pdf-page {
+  position: relative;
   margin-bottom: 1rem;
   border: 1px solid $grey-color-light;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  canvas {
+    display: block;
+    width: 100%;
+  }
+
+  // Invisible link areas laid over the PDF's own links
+  a {
+    position: absolute;
+
+    &:hover {
+      background: rgba($brand-color, 0.12);
+    }
+  }
 }
 
 .pdf-status {
