@@ -17,4 +17,4 @@ Available upon request. New draft coming soon!
 
 - **Prudential Regulation and Bank Lobbying** (with [Sylvain Benoit](https://sites.google.com/site/sylvainbenoit87/))
 
-- **Inspection design in Banking supervision**
+- **Inspection Design in Banking Supervision**
