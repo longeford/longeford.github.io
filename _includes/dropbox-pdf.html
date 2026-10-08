@@ -1,27 +1,82 @@
 {%- comment -%}
-  Embeds a PDF from a Dropbox shared link.
+  Shows a PDF from a Dropbox shared link, drawn page by page with PDF.js.
   Usage: {% include dropbox-pdf.html url=site.cv_dropbox_url title="CV" %}
-  "?dl=0" (preview page) is turned into "raw=1" (the file itself) for the viewer,
-  and into "dl=1" for the download link.
+
+  Why not an <iframe>: www.dropbox.com forbids being framed by other sites
+  (CSP frame-ancestors), which Firefox enforces even on its redirect. The direct
+  file host (dl.dropboxusercontent.com) allows cross-site fetches (CORS: *), so
+  PDF.js downloads the file from there and renders it onto <canvas> elements.
+  This also works on phones, where framed PDFs usually don't display.
 {%- endcomment -%}
 {%- assign url = include.url | strip -%}
 {%- if url != "" -%}
+  {%- assign file = url | replace: "www.dropbox.com", "dl.dropboxusercontent.com" | replace: "?dl=0&", "?" | replace: "&dl=0", "" | replace: "?dl=0", "" -%}
   {%- if url contains "dl=0" -%}
-    {%- assign raw = url | replace: "dl=0", "raw=1" -%}
     {%- assign download = url | replace: "dl=0", "dl=1" -%}
   {%- elsif url contains "?" -%}
-    {%- assign raw = url | append: "&raw=1" -%}
     {%- assign download = url | append: "&dl=1" -%}
   {%- else -%}
-    {%- assign raw = url | append: "?raw=1" -%}
     {%- assign download = url | append: "?dl=1" -%}
   {%- endif -%}
   <p class="pdf-links">
     <a href="{{ download }}">Download</a>
   </p>
-  <div class="pdf-embed">
-    <iframe src="{{ raw }}" title="{{ include.title | default: 'PDF' }}" loading="lazy"></iframe>
+  <div class="pdf-viewer" data-src="{{ file }}" aria-label="{{ include.title | default: 'PDF' }}">
+    <p class="pdf-status">Loading {{ include.title | default: "PDF" }}…</p>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>
+    (function () {
+      var viewer = document.currentScript.previousElementSibling.previousElementSibling;
+      var status = viewer.querySelector(".pdf-status");
+      if (!window.pdfjsLib) {
+        status.textContent = "The preview could not be loaded. Use the Download link above.";
+        return;
+      }
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+      var pdf = null, lastWidth = 0, generation = 0;
+
+      function render() {
+        var width = viewer.clientWidth;
+        if (!pdf || width === lastWidth) return;
+        lastWidth = width;
+        var current = ++generation; // a newer render (after a resize) cancels this one
+        viewer.querySelectorAll("canvas").forEach(function (c) { c.remove(); });
+        var ratio = window.devicePixelRatio || 1;
+        var chain = Promise.resolve();
+        for (var n = 1; n <= pdf.numPages; n++) {
+          (function (n) {
+            chain = chain.then(function () { return pdf.getPage(n); }).then(function (page) {
+              if (current !== generation) return;
+              var scale = width / page.getViewport({ scale: 1 }).width;
+              var viewport = page.getViewport({ scale: scale * ratio });
+              var canvas = document.createElement("canvas");
+              canvas.width = viewport.width;
+              canvas.height = viewport.height;
+              canvas.style.width = "100%";
+              viewer.appendChild(canvas);
+              return page.render({ canvasContext: canvas.getContext("2d"), viewport: viewport }).promise;
+            });
+          })(n);
+        }
+      }
+
+      pdfjsLib.getDocument(viewer.dataset.src).promise.then(function (doc) {
+        pdf = doc;
+        status.remove();
+        render();
+        var timer;
+        window.addEventListener("resize", function () {
+          clearTimeout(timer);
+          timer = setTimeout(render, 200);
+        });
+      }).catch(function () {
+        status.textContent = "The preview could not be loaded. Use the Download link above.";
+      });
+    })();
+  </script>
 {%- else -%}
   <p><em>{{ include.title | default: "PDF" }} coming soon.</em></p>
 {%- endif -%}
