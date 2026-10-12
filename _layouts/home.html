@@ -18,9 +18,12 @@ layout: base
 
 
   {%- if posts.size > 0 -%}
-    {%- if site.categories.size > 0 or site.tags.size > 0 -%}
-      <p class="topics-link"><a href="{{ "/blog/topics/" | relative_url }}">Browse by category and tag →</a></p>
-    {%- endif -%}
+    <p class="topics-link">
+      {%- if site.categories.size > 0 or site.tags.size > 0 -%}
+        <a href="{{ "/blog/topics/" | relative_url }}">Browse by category and tag →</a> ·
+      {% endif -%}
+      <a href="{{ "/feed.xml" | relative_url }}" title="Follow new posts in a feed reader">Subscribe (RSS)</a>
+    </p>
     {%- if page.list_title -%}
       <h2 class="post-list-heading">{{ page.list_title }}</h2>
     {%- endif -%}

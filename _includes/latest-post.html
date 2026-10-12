@@ -1,0 +1,18 @@
+{%- comment -%}
+  One line linking the newest blog post, with its description (if it has one) underneath.
+  Shows nothing while there are no posts.
+  Usage: {% include latest-post.html %}
+{%- endcomment -%}
+{%- assign latest = site.posts.first -%}
+{%- if latest -%}
+<div class="latest-post">
+  <p>
+    <strong>Latest on the blog:</strong>
+    <a href="{{ latest.url | relative_url }}">{{ latest.title | escape }}</a>
+    <span class="post-meta">· {{ latest.date | date: "%b %-d, %Y" }}</span>
+  </p>
+  {%- if latest.description -%}
+    <p class="latest-post-description">{{ latest.description | escape }}</p>
+  {%- endif -%}
+</div>
+{%- endif -%}

@@ -202,6 +202,22 @@ a:hover {
   font-size: 0.95rem;
 }
 
+// "Latest on the blog" line on the About page
+.latest-post {
+  margin: 1.5rem 0;
+  padding-left: 0.9rem;
+  border-left: 3px solid $brand-color;
+
+  p {
+    margin-bottom: 0.2rem;
+  }
+}
+
+.latest-post-description {
+  font-size: 0.9rem;
+  color: $grey-color;
+}
+
 .count {
   color: $grey-color;
   font-weight: 400;

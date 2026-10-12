@@ -17,4 +17,6 @@ Before my PhD, I worked as an analyst at the ECB and the Banque de France, condu
 
 Outside of research, I enjoy playing the guitar and the piano (in groups) and I spend my free time climbing and swimming (also in groups). A good recent novel that I read is Guillaume Chamanadjian's _Heureux comme jamais_. 
 
+{% include latest-post.html %}
+
 {% if site.author.email %}If you'd like to get in touch, feel free to [reach out](mailto:{{ site.author.email }}).{% endif %}
