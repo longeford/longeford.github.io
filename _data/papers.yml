@@ -15,16 +15,16 @@
     - name: Sylvain Carré
       url: https://sites.google.com/view/sylvain-carre/research
   note: "Available upon request. New draft coming soon!"
-  # abstract: >
-  #   Write the abstract here, indented like this line.
+  abstract: >
+     If banks and the regulator have diverging objectives, why do we routinely observe communication between them? We propose a solution based on imperfect supervision. We consider a leading example of regulation---capital requirements, whose optimal level depends on the cost of equity. Banks commit to either reveal this cost or to not communicate, which we interpret respectively as having installed a culture of cooperation with the regulator, or not. In the benchmark case of perfect supervision, we verify that the divergence between private and public objectives never leads to communication. By contrast, under imperfect supervision, we evidence a rich interaction between non-compliance penalties, capital requirements, and banks' incentives to disclose. We prove that there typically exists a range of penalties that induce bank disclosure and that the regulator may indeed find it optimal to select one of them. Viewed through this lens, penalties are not only "threats", but also a cooperation-inducing mechanism.
   # links:
   #   - label: SSRN
   #     url: https://papers.ssrn.com/...
-  # presentations:
-  #   - event: Conference name
+  presentations:
+    - event: LAPE-FINEST Spring Workshop
   #     url: https://conference-website...
-  #     place: City
-  #     date: Month Year
+      place: Limoges
+      date: March 2026
 
 - section: wip
   title: "Prudential Regulation and Bank Lobbying"
