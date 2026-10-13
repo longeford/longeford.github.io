@@ -223,6 +223,80 @@ a:hover {
   font-weight: 400;
 }
 
+// Research page: one block per paper (_includes/paper.html)
+.paper {
+  margin-bottom: 1.8rem;
+
+  p {
+    margin-bottom: 0.3rem;
+  }
+}
+
+.post-content .paper-title {
+  margin: 0 0 0.2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.paper-authors,
+.paper-note {
+  font-size: 0.95rem;
+  color: $grey-color-dark;
+}
+
+.paper-note {
+  font-style: italic;
+}
+
+.paper-links a {
+  display: inline-block;
+  margin-right: 0.4rem;
+  padding: 0 0.6rem;
+  border: 1px solid $brand-color;
+  border-radius: 4px;
+  font-size: 0.85rem;
+
+  &:hover {
+    background: $brand-color;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+.paper-abstract {
+  margin: 0.3rem 0;
+
+  summary {
+    cursor: pointer;
+    color: $brand-color;
+    font-size: 0.95rem;
+  }
+
+  p {
+    margin: 0.4rem 0 0.6rem;
+    font-size: 0.95rem;
+    text-align: justify;
+  }
+}
+
+.paper-presentations {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $grey-color;
+
+  .label {
+    font-weight: 700;
+  }
+
+  a {
+    color: $grey-color-dark;
+
+    &:hover {
+      color: $brand-color;
+    }
+  }
+}
+
 // CV
 .pdf-frame {
   display: block;

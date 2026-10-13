@@ -1,0 +1,47 @@
+{%- comment -%}
+  One paper entry on the Research page. Data comes from _data/papers.yml.
+  Usage: {% include paper.html paper=paper %}
+{%- endcomment -%}
+{%- assign p = include.paper -%}
+<article class="paper">
+  <h3 class="paper-title">{{ p.title }}</h3>
+
+  {%- if p.coauthors -%}
+  <p class="paper-authors">with
+    {% for c in p.coauthors -%}
+      {%- if c.url -%}<a href="{{ c.url }}">{{ c.name }}</a>{%- else -%}{{ c.name }}{%- endif -%}
+      {%- unless forloop.last -%}{%- if forloop.rindex == 2 %} and {% else %}, {% endif -%}{%- endunless -%}
+    {%- endfor -%}
+  </p>
+  {%- endif -%}
+
+  {%- if p.note -%}
+  <p class="paper-note">{{ p.note }}</p>
+  {%- endif -%}
+
+  {%- if p.links -%}
+  <p class="paper-links">
+    {%- for l in p.links -%}
+      <a href="{{ l.url | relative_url }}">{{ l.label }}</a>
+    {%- endfor -%}
+  </p>
+  {%- endif -%}
+
+  {%- if p.abstract -%}
+  <details class="paper-abstract">
+    <summary>Abstract</summary>
+    {{ p.abstract | markdownify }}
+  </details>
+  {%- endif -%}
+
+  {%- if p.presentations -%}
+  <div class="paper-presentations">
+    <span class="label">Presented at:</span>
+    {% for t in p.presentations -%}
+      {%- if t.url -%}<a href="{{ t.url }}">{{ t.event }}</a>{%- else -%}{{ t.event }}{%- endif -%}
+      {%- if t.place or t.date %} ({{ t.place }}{% if t.place and t.date %}, {% endif %}{{ t.date }}){% endif -%}
+      {%- unless forloop.last %} · {% endunless -%}
+    {%- endfor -%}
+  </div>
+  {%- endif -%}
+</article>

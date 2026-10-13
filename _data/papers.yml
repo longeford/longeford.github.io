@@ -1,0 +1,36 @@
+# Papers shown on the Research page (research.md), in the order listed here.
+#
+# Fields (only title and section are required; leave out anything you don't have):
+#   section:   working  -> "Working Papers"   |   wip -> "Work in Progress"
+#   title:     paper title
+#   coauthors: list of { name, url } (url optional); leave out for solo papers
+#   note:      short line under the title, e.g. "Available upon request"
+#   abstract:  text of the abstract (use  >  and indent the lines below it)
+#   links:     buttons, list of { label, url }, e.g. PDF, Slides, SSRN
+#   presentations: list of { event, url, place, date } (url, place, date optional)
+
+- section: working
+  title: "Imperfect Supervision, Regulatory Penalties, and Banks’ Disclosing Culture"
+  coauthors:
+    - name: Sylvain Carré
+      url: https://sites.google.com/view/sylvain-carre/research
+  note: "Available upon request. New draft coming soon!"
+  # abstract: >
+  #   Write the abstract here, indented like this line.
+  # links:
+  #   - label: SSRN
+  #     url: https://papers.ssrn.com/...
+  # presentations:
+  #   - event: Conference name
+  #     url: https://conference-website...
+  #     place: City
+  #     date: Month Year
+
+- section: wip
+  title: "Prudential Regulation and Bank Lobbying"
+  coauthors:
+    - name: Sylvain Benoit
+      url: https://sites.google.com/site/sylvainbenoit87/
+
+- section: wip
+  title: "Inspection Design in Banking Supervision"
